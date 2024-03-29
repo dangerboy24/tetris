@@ -55,3 +55,44 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+html {
+    min-height: 100vh;
+    background: url('video.gif') no-repeat;
+    background-size: cover;
+    padding: 15px;
+}
+
+#container {
+    width: 300px;
+    height: 515px;
+    margin: 50px auto 0;
+    padding: 15px;
+    position: relative;
+}
+
+#game-board {
+    border: 3px solid #fff;
+    overflow: hidden
+}
+
+#next {
+    border: 1px solid #ffffff;
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    box-shadow: 1px 7px 15px #000;
+}
+
+#score-div, #level-div {
+    width: 80px;
+    height: 50px;
+    border: 1px solid #ffffff;
+    position: absolute;
+    top: 120px;
+    right: 15px;
+    box-shadow: 1px 7px 15px #000;
+    text-align: center;
+    color: #fff;
+
+}
