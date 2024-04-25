@@ -194,7 +194,46 @@ Piece.prototype.lock = function () {
     removeRow()
     drawBoard()
 }
-// CONTROL the piece
+//CONTROL piece with Swipe
+
+document.getElementById('container').addEventListener('swiped', e => {
+    let swipe_dir = e.detail.dir;
+    if (swipe_dir === "left") {
+        if (!gameOver) {
+            p.moveLeft();
+        } else {
+            if (level === 1) {
+                level = 5
+            } else {
+                level -= 1
+            }
+            gameLevelElement.innerHTML = level
+        }
+    } else if (swipe_dir === "up") {
+        if (!gameOver) {
+            p.rotate();
+        }
+    } else if (swipe_dir === "right") {
+        if (!gameOver) {
+            p.moveRight();
+        } else {
+            if (level === 5) {
+                level = 1
+            } else {
+                level += 1
+            }
+            gameLevelElement.innerHTML = level
+
+        }
+    } else if (swipe_dir === "down") {
+        if (!gameOver) {
+            p.moveDown();
+        }
+    }
+});
+
+
+// CONTROL the piece With Keyboard
 
 document.addEventListener("keydown", CONTROL);
 

@@ -55,6 +55,10 @@
         </div>
     </div>
 </div>
+<script src="tetromino.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swiped-events/1.1.9/swiped-events.min.js"
+        integrity="sha512-Km1M9MRIhy+uzmSn7MU2G0fQawFMpfpScHpf0UUvcpkGJCJhwlTRF/mbTUimo1N9woYZ5RLES7iL+kp65Q1d0Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="tetris.js"></script>
 </body>
 </html>
