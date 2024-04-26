@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="fa">
+<html lang="fa"
+      style="min-height: 100vh; background: url('video.gif') no-repeat;background-size: cover;padding: 15px">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -10,19 +11,22 @@
     <title>Tetris Game</title>
 </head>
 <body>
-<div id="container">
-    style="overflow: hidden;width: 208px;position: relative;box-shadow: 1px 7px 15px #000;">
-    <canvas id="game-board" width="200" height="400"></canvas>
+<div id="container" style="width: 300px;height: 555px;margin: 50px auto 0;padding: 15px;position: relative;">
+    <div id="reset-game" class=""
+         style="overflow: hidden;width: 208px;position: relative;box-shadow: 1px 7px 15px #000;margin-bottom: 25px">
+        <canvas id="game-board" width="200" height="400" style="border: 3px solid #fff;overflow: hidden"></canvas>
+    </div>
     <canvas id="next"
+            style="border: 1px solid #ffffff;position: absolute; top: 20px;right: 15px;box-shadow: 1px 7px 15px #000;"
             width="80"
             height="80"></canvas>
-    <div id="score-div">
-        <span style="display: inline-block;height: 20px;background: #3498db;">Score</span>
-        <span id="score" style="display: block;padding-top: 5px;">0</span>
+    <div style="width: 80px;height: 50px;border: 1px solid #ffffff;position: absolute; top: 120px;right: 15px;box-shadow: 1px 7px 15px #000;">
+        <span style="display: inline-block;height: 20px;width: 100%;background: #3498db;color: #fff;text-align: center">Score</span>
+        <span id="score" style="text-align: center;color: #fff;width: 100%;display: block;padding-top: 5px;">0</span>
     </div>
-    <div id="level-div">
-        <span style="display: inline-block;height: 20px;background: #3498db;">Level</span>
-        <span id="level" style="display: block;padding-top: 5px;">1</span>
+    <div style="width: 80px;height: 50px;border: 1px solid #ffffff;position: absolute; top: 220px;right: 15px;box-shadow: 1px 7px 15px #000;">
+        <span style="display: inline-block;height: 20px;width: 100%;background: #3498db;color: #fff;text-align: center">Level</span>
+        <span id="level" style="text-align: center;color: #fff;width: 100%;display: block;padding-top: 5px">1</span>
     </div>
     <div id="controllers">
         <div class="right" style="float: right;color: #fff;font-size: 2em;width: 100px">
@@ -41,24 +45,33 @@
             </div>
         </div>
         <div class="left"
-             style="display: inline-block;margin-top: 20px;color: #fff;font-size: 1.1em;position: relative;text-align: center">
+             style="display: flex;justify-content: center;row-gap: 10px;flex-wrap: wrap;color: #fff;font-size: 1.1em;position: relative;text-align: center">
             <div>
-                <i class="bi bi-circle-fill start-button" style="margin-right: 25px" onclick=" startGame()"></i>
-                <i class="bi bi-circle-fill pause-button" style="margin-right: 25px" onclick=" pause()"></i>
-                <i class="bi bi-circle-fill reset-game-button" onclick="resetGame()"></i>
+                <i class="bi bi-circle-fill start-button" onclick=" startGame()"></i>
+                <span style="display: inline-block;width: 100%">Start(S)</span>
             </div>
             <div>
-                <span>Start(S)</span>
-                <span>Pause(P)</span>
-                <span>Reset(R)</span>
+                <i class="bi bi-circle-fill pause-button" onclick=" pause()"></i>
+                <span style="display: inline-block;width: 100%">Pause(P)</span>
+
+            </div>
+            <div>
+                <i class="bi bi-circle-fill reset-game-button" onclick="resetGame()"></i>
+                <span style="display: inline-block;width: 100%">Reset(R)</span>
+
+            </div>
+            <div>
+                <i class="bi bi-circle-fill reset-game-button" style="font-size: 3em" onclick="dropDown()"></i>
+                <span style="display: inline-block;width: 100%">DropDown(space)</span>
             </div>
         </div>
     </div>
 </div>
+</body>
 <script src="tetromino.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/swiped-events/1.1.9/swiped-events.min.js"
         integrity="sha512-Km1M9MRIhy+uzmSn7MU2G0fQawFMpfpScHpf0UUvcpkGJCJhwlTRF/mbTUimo1N9woYZ5RLES7iL+kp65Q1d0Q=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="tetris.js"></script>
-</body>
+
 </html>

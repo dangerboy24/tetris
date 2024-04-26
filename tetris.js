@@ -116,7 +116,7 @@ Piece.prototype.collision = function (x, y, piece) {
 }
 // move Right the piece
 Piece.prototype.moveRight = function () {
-    if (!this.collision(1, 0, this.activeTetromino)) {
+    if (!this.collision(1, 0, this.activeTetromino) && intervalId) {
         this.unDraw();
         this.x++;
         this.draw();
@@ -124,7 +124,9 @@ Piece.prototype.moveRight = function () {
 }
 // move Down the piece
 Piece.prototype.moveDown = function () {
-    if (!this.collision(0, 1, this.activeTetromino)) {
+    if (!intervalId) {
+        return
+    } else if (!this.collision(0, 1, this.activeTetromino)) {
         this.unDraw()
         this.y++;
         this.draw();
@@ -139,7 +141,7 @@ Piece.prototype.moveDown = function () {
 
 // move left the piece
 Piece.prototype.moveLeft = function () {
-    if (!this.collision(-1, 0, this.activeTetromino)) {
+    if (!this.collision(-1, 0, this.activeTetromino) && intervalId) {
         this.unDraw();
         this.x--;
         this.draw();
@@ -147,7 +149,7 @@ Piece.prototype.moveLeft = function () {
 }
 // move right the piece
 Piece.prototype.moveRight = function () {
-    if (!this.collision(1, 0, this.activeTetromino)) {
+    if (!this.collision(1, 0, this.activeTetromino) && intervalId) {
         this.unDraw();
         this.x++;
         this.draw();
@@ -164,7 +166,7 @@ Piece.prototype.rotate = function () {
             kick = 1
         }
     }
-    if (!this.collision(kick, 0, nextPattern)) {
+    if (!this.collision(kick, 0, nextPattern) && intervalId) {
         this.unDraw()
         this.x += kick
         this.tetrominoN = (this.tetrominoN + 1) % this.tetromino.length
@@ -196,49 +198,14 @@ Piece.prototype.lock = function () {
 }
 //CONTROL piece with Swipe
 
-document.getElementById('container').addEventListener('swiped', e => {
-    let swipe_dir = e.detail.dir;
-    if (swipe_dir === "left") {
-        if (!gameOver) {
-            p.moveLeft();
-        } else {
-            if (level === 1) {
-                level = 5
-            } else {
-                level -= 1
-            }
-            gameLevelElement.innerHTML = level
-        }
-    } else if (swipe_dir === "up") {
-        if (!gameOver) {
-            p.rotate();
-        }
-    } else if (swipe_dir === "right") {
-        if (!gameOver) {
-            p.moveRight();
-        } else {
-            if (level === 5) {
-                level = 1
-            } else {
-                level += 1
-            }
-            gameLevelElement.innerHTML = level
-
-        }
-    } else if (swipe_dir === "down") {
-        if (!gameOver) {
-            p.moveDown();
-        }
-    }
-});
-
+document.getElementById('container').addEventListener('swiped', CONTROL)
 
 // CONTROL the piece With Keyboard
 
 document.addEventListener("keydown", CONTROL);
 
 function CONTROL(event) {
-    if (event.code === "ArrowLeft") {
+    if (event.code === "ArrowLeft" || event.detail.dir === 'left') {
         if (!gameOver) {
             p.moveLeft();
         } else {
@@ -249,11 +216,11 @@ function CONTROL(event) {
             }
             gameLevelElement.innerHTML = level
         }
-    } else if (event.code === "ArrowUp") {
+    } else if (event.code === "ArrowUp" || event.detail.dir === 'up') {
         if (!gameOver) {
             p.rotate();
         }
-    } else if (event.code === "ArrowRight") {
+    } else if (event.code === "ArrowRight" || event.detail.dir === 'right') {
         if (!gameOver) {
             p.moveRight();
         } else {
@@ -269,6 +236,8 @@ function CONTROL(event) {
         if (!gameOver) {
             p.moveDown();
         }
+    } else if (event.code == 'Space' || event.detail.dir === 'down') {
+        dropDown();
     } else if (event.code === "KeyP") {
         pause()
     } else if (event.code === 'KeyR') {
@@ -359,4 +328,11 @@ function showNext() {
     }
 }
 
+function dropDown() {
+    if (!gameOver) {
+        while (!p.collision(0, 1, p.activeTetromino) && intervalId) {
+            p.moveDown()
+        }
+    }
+}
 
